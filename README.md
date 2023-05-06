@@ -1,5 +1,5 @@
 # 8ボタン　IoTタイムスタンプ
-ボタンを押したら、WEB上のgoogle spreadsheetに　　
+ボタンを押したら、WEB上のgoogle spreadsheetに  
 押したボタン番号と時間とステータス(0/1)が記録されます。  
 コストパフォーマンス優先で、ESP32-C3-WROOM02-N4を使用しました。  
   
