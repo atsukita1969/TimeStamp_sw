@@ -6,7 +6,7 @@
 <img src="https://user-images.githubusercontent.com/44044800/236591860-a33f93b5-0a1a-4116-a17f-4ec67a4c1056.png" width="600px">  
 
   
-### spreadsheetの状態  
+## spreadsheetの状態  
 <img src="https://user-images.githubusercontent.com/44044800/236590864-9081fc97-92b7-49e4-a0a1-696463e1dc3f.png" width="320px">  
 
   
@@ -15,6 +15,6 @@ https://raspberry-pi.nomad-life.net/1917477/memo/esp32%e3%81%a7google%e3%82%b9%e
 
 （参考：https://www.haruirosoleil.com/entry/2020/02/02/101937）  
   
-### arduino IDE書き込み設定  
+## arduino IDE書き込み設定  
 arduino IDEの書き込み時の設定は下記。（USB-UARTブリッジ等を使わず、ESP32で内蔵USB-JTAGを使う場合）  
 <img src="https://user-images.githubusercontent.com/44044800/236589669-b7789ccb-04f2-46ec-88a8-865c9b4ca2c5.png" width="560px">
