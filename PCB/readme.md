@@ -1,3 +1,3 @@
 # PCB file
   
-eagle
+eagle / Fusion360
