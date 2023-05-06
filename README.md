@@ -8,6 +8,9 @@
 ## Switch PCB  
 <img src="https://user-images.githubusercontent.com/44044800/236592204-7be12f47-f304-4879-a2df-b811b6666226.png" width="800px">  
   
+## Switch BOX  
+<img src="https://user-images.githubusercontent.com/44044800/236593128-8c75cdf0-b6e0-45e3-a875-2be83c13c8ac.png" width="800px">
+  
 ## spreadsheetの状態  
 <img src="https://user-images.githubusercontent.com/44044800/236590864-9081fc97-92b7-49e4-a0a1-696463e1dc3f.png" width="320px">  
 
