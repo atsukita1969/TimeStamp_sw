@@ -2,6 +2,9 @@
 ボタンを押したら、WEB上のgoogle spreadsheetに  
 押したボタン番号と時間とステータス(0/1)が記録されます。  
 コストパフォーマンス優先で、ESP32-C3-WROOM02-N4を使用しました。  
+## Main PCB  
+<img src="https://user-images.githubusercontent.com/44044800/236591860-a33f93b5-0a1a-4116-a17f-4ec67a4c1056.png" width="600px">  
+
   
 ### spreadsheetの状態  
 <img src="https://user-images.githubusercontent.com/44044800/236590864-9081fc97-92b7-49e4-a0a1-696463e1dc3f.png" width="320px">  
