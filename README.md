@@ -4,6 +4,7 @@
 コストパフォーマンス優先で、ESP32-C3-WROOM02-N4を使用しました。  
 ## Main PCB  
 <img src="https://user-images.githubusercontent.com/44044800/236591860-a33f93b5-0a1a-4116-a17f-4ec67a4c1056.png" width="600px">  
+
 ## Switch PCB  
 <img scr="https://user-images.githubusercontent.com/44044800/236592204-7be12f47-f304-4879-a2df-b811b6666226.png" width="800px">  
   
