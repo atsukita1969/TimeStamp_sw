@@ -8,6 +8,7 @@ https://raspberry-pi.nomad-life.net/1917477/memo/esp32%e3%81%a7google%e3%82%b9%e
 
 （参考：https://www.haruirosoleil.com/entry/2020/02/02/101937）  
   
+### arduino IDE書き込み設定
 arduino IDEの書き込み時の設定は下記。（USB-UARTブリッジ等を使わず、ESP32で内蔵USB-JTAGを使う場合）  
 
 
