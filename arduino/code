@@ -1,0 +1,175 @@
+/8 button ESP32-C3 time stamp version
+#include <Arduino.h>
+#include <Wire.h>
+#include <WiFi.h>
+#include <WiFiMulti.h>
+#include <WiFiClient.h>
+#include <Adafruit_MCP23X17.h>
+#include <WiFiClientSecure.h>
+Adafruit_MCP23X17 mcp1;
+#define INT_PIN 6 /MCP->ESP 割込用ピン番号
+
+WiFiMulti wifiMulti;
+
+int button[8] = {8,9,10,11,12,13,14,15}; //MCPのボタン用ピンアサイン
+int LEDbutton[8] = {0,1,2,3,4,5,6,7}; //各LEDのピンアサイン
+int ledstate[8] = {0,0,0,0,0,0,0,0}; //各ボタンの状態
+int ledval[8] = {1,1,1,1,1,1,1,1}; //各ボタンの状態（計算用）
+int pushButton = 0;
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(4,5); //I2C用ポート設定(SDA, SCL)
+  delay(500);
+  //エキスパンダmcp1開始
+  if (!mcp1.begin_I2C(0x20)) {
+    Serial.println("Error.");
+    while (1);
+  }
+  //ESP32側　割込検知用入力のピンモード設定
+  pinMode(INT_PIN, INPUT);
+  
+  //MCP23017のピンモード設定（入力用）
+  for (int k=0; k <= 7; k++){
+  mcp1.pinMode(button[k], INPUT_PULLUP);
+  }
+
+//MCP23017の割り込み設定（INTA,B, プッシュプル, LOW）
+  mcp1.setupInterrupts(true, false, LOW);
+
+//MCP23017割り込みピン（入力ピン）の初期化
+  for (int o=0; o <= 7; o++){
+  mcp1.setupInterruptPin(button[o], LOW);
+  }
+
+  //MCP23017出力ピンのモード設定
+  for (int l=0; l <= 7; l++){
+  mcp1.pinMode(LEDbutton[l], OUTPUT); //mcp1用LEDのピンモード設定
+  }
+
+  // LEDの状態初期化
+  for(int p=0; p <= 7; p++){
+    mcp1.digitalWrite(LEDbutton[p], LOW);
+  }
+
+  //ESP32C3 I/O3番(WiFi接続モニタ)を出力にして初期化
+   pinMode(3, OUTPUT);
+   digitalWrite(3,LOW);
+delay(100);
+
+//wifi設定 接続可能なwifi設定
+wifiMulti.addAP("SSID1??????", "PASS??????");
+wifiMulti.addAP("SSID2?????", "PASS?????");
+
+connectWiFi();
+}
+
+void loop() {
+if(!digitalRead(INT_PIN)){
+  Serial.println("");
+  Serial.println("====================================");
+  Serial.print("Interrupt detected on pin: ");
+  Serial.println(mcp1.getLastInterruptPin());
+  pushButton = mcp1.getLastInterruptPin() - 8;
+  Serial.print("Push button No.: ");
+  Serial.println(pushButton);
+
+ ledval[pushButton]=ledval[pushButton] + 1;
+
+  if(ledval[pushButton] % 2 == 0 ){
+    ledstate[pushButton] = 1;
+    } else {
+      ledstate[pushButton] = 0;
+    }
+
+  String timestamp = String(pushButton)+','+ledstate[pushButton];
+  Serial.println(timestamp);
+   
+if (ledstate[pushButton] == 0){
+  mcp1.digitalWrite(LEDbutton[pushButton], LOW);
+ 
+}else{
+  mcp1.digitalWrite(LEDbutton[pushButton], HIGH);
+  //Serial.println("HIGH");
+}
+
+  sendData();
+  delay(250);
+ // buttonstate[pushButton] = 0;
+  
+    //delay(1000);
+    mcp1.clearInterrupts();
+}
+}
+//++++++++++++++++++++++++++++++++++++++
+//WiFiに接続
+void connectWiFi(){
+  
+  Serial.println("  connecting to...");
+
+  while(wifiMulti.run() != WL_CONNECTED){
+    Serial.print(".");
+       delay(500);
+  }
+  digitalWrite(3, HIGH);
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  //IPアドレスの表示
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+}
+
+//測定データの送信
+void sendData(){
+
+  WiFiClientSecure sslclient;
+
+  const char* server = "script.google.com";
+  String url = "???????"; //googlescript web appのurlを入力
+
+  //測定値を準備
+  int sensor_data1= pushButton; //ボタン番号
+  int sensor_data2= ledstate[pushButton]; //LEDの状態
+
+  //wifiに接続
+  connectWiFi();
+
+  //測定値の表示
+  Serial.print("button No. ");
+  Serial.println(sensor_data1);
+  Serial.print("LED state ");
+  Serial.println(sensor_data2);
+ 
+  //urlの末尾に測定値を加筆
+  url += "?";
+  url += "&1_cell=";
+  url += sensor_data1;
+  url += "&2_cell=";
+  url += sensor_data2;
+  //url += "&3_cell=";
+  //url += sensor_data3;
+
+  // サーバーにアクセス
+  Serial.println("server connecting...");
+
+  //データの送信
+  sslclient.setInsecure();
+  if (!sslclient.connect(server, 443)) {
+    Serial.println("Failed to connect");
+    Serial.println("");//改行
+    return;
+  }
+
+  Serial.println("server connected.");
+
+  sslclient.println("GET " + url);
+  delay(1000); 
+  sslclient.stop();
+
+  Serial.println("data sending done.");
+  Serial.println("");//改行
+
+  //WiFiを切断
+ // WiFi.mode(WIFI_OFF);
+}
