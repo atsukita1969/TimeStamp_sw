@@ -3,6 +3,10 @@
 押したボタン番号と時間とステータス(0/1)が記録されます。  
 コストパフォーマンス優先で、ESP32-C3-WROOM02-N4を使用しました。  
   
+### spreadsheetの状態  
+![image](https://user-images.githubusercontent.com/44044800/236590864-9081fc97-92b7-49e4-a0a1-696463e1dc3f.png)  
+
+  
 spreadsheetの設定は下記を参照。  
 https://raspberry-pi.nomad-life.net/1917477/memo/esp32%e3%81%a7google%e3%82%b9%e3%83%97%e3%83%ac%e3%83%83%e3%83%89%e3%82%b7%e3%83%bc%e3%83%88%e3%81%ab%e6%9b%b8%e3%81%8d%e8%be%bc%e3%82%93%e3%81%a7%e3%81%bf%e3%82%8b/%e3%80%90arduino_ide%e3%80%91googlesheet%e3%81%ab%e6%9b%b8%e3%81%8d%e8%be%bc%e3%82%93%e3%81%a7%e3%81%bf%e3%81%9f  
 
