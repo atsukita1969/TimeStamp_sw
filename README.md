@@ -4,7 +4,7 @@
 コストパフォーマンス優先で、ESP32-C3-WROOM02-N4を使用しました。  
   
 ### spreadsheetの状態  
-![image](https://user-images.githubusercontent.com/44044800/236590864-9081fc97-92b7-49e4-a0a1-696463e1dc3f.png)  
+<img src="https://user-images.githubusercontent.com/44044800/236590864-9081fc97-92b7-49e4-a0a1-696463e1dc3f.png" width="320px">  
 
   
 spreadsheetの設定は下記を参照。  
